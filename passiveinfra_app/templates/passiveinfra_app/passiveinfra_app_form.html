@@ -1,0 +1,14 @@
+{%extends "passiveinfra_app/outerlayout.html"%}
+
+{%block content%}
+
+    <h1><font size="4">Passive Sites Correspondence  </font></h1>
+        <form  method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+
+        </form>
+
+{%endblock%}
+
