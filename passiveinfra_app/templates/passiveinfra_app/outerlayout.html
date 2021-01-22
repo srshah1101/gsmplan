@@ -11,6 +11,7 @@
 
         <title>CMDesk</title>
 
+
         <!-- Bootstrap Core CSS -->
         <link href= "{% static  'css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -35,13 +36,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+
+
+
     </head>
     <body>
 
         <div id="wrapper">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-expand-lg bg-primary navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">CMDesk</a>
                 </div>
@@ -155,7 +160,7 @@
                                         <a href="flot.html">Flot Charts</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Morris.js Charts</a>
+                                        <a href="operator_revenue_chart.html">Morris.js Charts</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -249,18 +254,18 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">CMDesk - A Single window system.</h1>
+                            <h3 class="page-header">CMDesk</h3>
                         </div>
                         <!-- /.col-lg-12 -->
-                            {% block body %}
+                            {% block content %}
                             {% endblock %}
-                        </div>
+                    </div>
 
-                    </div>
-                    <!-- /.row -->
-                    </div>
-                <!-- /.container-fluid -->
                 </div>
+                    <!-- /.row -->
+            </div>
+                <!-- /.container-fluid -->
+            </div>
             <!-- /#page-wrapper -->
 
             </div>
@@ -272,16 +277,18 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
+
         <!-- Metis Menu Plugin JavaScript -->
         <script src="{% static 'js/metisMenu.min.js' %}"></script>
 
         <!-- Morris Charts JavaScript -->
-        <script src="{% static 'js/raphael.min.js' %}"></script>
-        <script src="{% static 'js/morris.min.js' %}"></script>
-        <script src="{% static 'js/morris-data.js' %} "></script>
 
+        <script src="{% static 'js/raphael.min.js' %}"></script>
+        <script src="{% static 'js/morris.min.js' %}"></script>-->
+        <script src="{% static 'js/morris-data.js' %} "></script>
         <!-- Custom Theme JavaScript -->
         <script src="{% static 'js/startmin.js' %}"></script>
+
 
     </body>
 </html>
