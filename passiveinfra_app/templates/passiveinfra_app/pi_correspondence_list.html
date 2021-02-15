@@ -41,7 +41,7 @@
                                                {% for object in object_list %}
                                                  <tr>
 
-                                                   <td><img src="{{ object.original_letter.url }}" >{{ object.original_letter }}</a></td>
+                                                   <td><a href ="{{ object.original_letter.url }}" >{{ object.original_letter }}</a></td>
                                                    <td> {{ object.originletter_date | date}}</td>
                                                    <td> {{ object.originlletter_desc}}</td>
                                                    <td> {{ object.reply_letter}}</td>
