@@ -1,0 +1,43 @@
+<!--for datatable  -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchpanes/1.1.1/css/searchPanes.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.5.2/css/colReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+     $(document).ready( function () {
+                 var table = $('#table_id').DataTable( {
+                  dom: 'Bfrtip',
+                  colReorder: true,
+                  responsive: true,
+                  "scrollY": "340px",
+                  "scrollCollapse": true,
+                  "paging": true,
+                  "pagingType": "full_numbers",
+                   buttons: [
+                            {
+                                extend: 'colvis',
+                                postfixButtons: [ 'colvisRestore' ]
+                            }
+                            ,'copy', 'csv', 'excel', 'pdf', 'print', 'searchPanes'
+                            ],
+                            } ); //DataTable
+                            } );//Function
+ </script>
+
+<script>
+     $(document).ready( function () {
+                 var table = $('#DataTableId').DataTable( {
+                  dom: 'Bfrtip',
+                  colReorder: true,
+                  responsive: true,
+                  "scrollY": "540px",
+                  "scrollCollapse": true,
+                  "paging": true,
+                  "pagingType": "full_numbers"
+                            } ); //DataTable
+                            } );//Function
+ </script>

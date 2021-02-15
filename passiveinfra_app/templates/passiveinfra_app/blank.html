@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -9,71 +8,56 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>CMDesk</title>
+        <title>CMDesk </title>
 
-
-        <!-- Bootstrap Core CSS -->
-        <link href= "{% static  'css/bootstrap.min.css' %}" rel="stylesheet">
-
-        <!-- MetisMenu CSS -->
-        <link href="{% static '/css/metisMenu.min.css'  %}" rel="stylesheet">
-
-        <!-- Timeline CSS -->
-        <link href="{% static 'css/timeline.css'%}" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="{% static 'css/startmin.css' %}" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="{% static 'css/morris.css' %}" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        {% include "passiveinfra_app/bootstrap_lib.html" %}
+        {% block datatable_css %}
+        {% endblock %}
     </head>
     <body>
+
         <div id="wrapper">
+
             <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg bg-primary navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a style="color:White;" class="navbar-brand" href="index.html" >CMDesk</style></a>
+                    <a style="color:White;" class="navbar-brand" href="index.html">CMDesk</a>
                 </div>
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <ul class="nav  navbar-right navbar-top-links">
+
+                <ul class="nav navbar-nav navbar-left navbar-top-links">
+                    <li><a style="color:White;" href="#"><i class="fa fa-home fa-fw"></i> Others </a></li>
+                </ul>
+                  <ul class="nav  navbar-right navbar-top-links">
                     <li><a style="color:White;" href="{% url 'logout' %}"><i class="fa fa-home fa-fw"></i>Logout</a></li>
                 </ul>
 
                 <ul class="nav navbar-right navbar-top-links">
-
-                    <li  class="dropdown">
-                        <a style="color:White;"  class="dropdown-toggle" data-toggle="dropdown" href="#">
+                     <li class="dropdown">
+                        <a style="color:White;" class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i> {{user.username}} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a style="color:White;" href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a  href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
+
                 </ul>
                 <!-- /.navbar-top-links -->
 
-                <div class="navbar-default sidebar" role="navigation">
+               <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li class="sidebar-search">
@@ -88,25 +72,31 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="index.html" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="{% url 'passiveinfra-dashboard' %}" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                         <a href="{% url 'revenu-chart' %}"> Revenue Chart</a>
+                                       <a href="{% url 'revenu-chart' %}"> Revenue Chart1</a>
                                     </li>
 
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="{% url 'Corres-List' %}"><i class="fa fa-table fa-fw"></i> Correspondence</a>
+                                <a href="{% url 'sites-details' %}"><i class="fa fa-table fa-fw"></i>  Infra Sites Detail1</a>
                             </li>
                             <li>
-                                <a href="{% url 'passiveinfra-form' %}"><i class="fa fa-wrench fa-fw"></i> Forms<span class="fa arrow"></span></a>
+                                <a href="{% url 'Corres-List' %}"><i class="fa fa-table fa-fw"></i> All Correspondence</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'create-form' %}"><i class="fa fa-wrench fa-fw"></i> Forms<span class="fa arrow"></span></a>
 
                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{% url 'create-form' %}"><i class="fa fa-fw"></i> Important Parameter</a>
+                                    </li>
                                     <li>
                                         <a href="{% url 'passiveinfra-form' %}"><i class="fa fa-fw"></i> Correspondence</a>
                                     </li>
@@ -151,7 +141,7 @@
                                         <a href="blank.html">Blank Page</a>
                                     </li>
                                     <li>
-                                        <a style="color:White;" href="{% url 'logout' %}">Logout Page</a>
+                                        <a href="{% url 'logout' %}">Logout Page</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -159,47 +149,29 @@
                         </ul>
                     </div>
                 </div>
+                <!-- /.navbar-static-side -->
             </nav>
-
+            {% block main_body %}
+            <!-- Page Content -->
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3 style="color:Blue;" class="page-header"><b>CMDesk</b></h3>
+                            <h1 class="page-header">Blank</h1>
                         </div>
                         <!-- /.col-lg-12 -->
-                            {% block content %}
-                            {% endblock %}
                     </div>
-
-                </div>
                     <!-- /.row -->
-            </div>
+                </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- /#page-wrapper -->
-
-            </div>
+            {% endblock %}
+        </div>
         <!-- /#wrapper -->
 
-        <!-- jQuery -->
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="{% static 'js/metisMenu.min.js' %}"></script>
-
-        <!-- Morris Charts JavaScript -->
-
-        <script src="{% static 'js/raphael.min.js' %}"></script>
-        <script src="{% static 'js/morris.min.js' %}"></script>-->
-        <script src="{% static 'js/morris-data.js' %} "></script>
-        <!-- Custom Theme JavaScript -->
-        <script src="{% static 'js/startmin.js' %}"></script>
-
-
+        {% include "passiveinfra_app/js_lib.html" %}
+        {% block datatable_script %}
+        {% endblock %}
     </body>
 </html>

@@ -1,54 +1,361 @@
-<!DOCTYPE html>
-{% extends 'passiveinfra_app/outerlayout.html' %}
-{{ form.media }}
+{% extends 'passiveinfra_app/blank.html' %}
+{%  block main_body  %}
+  <div id="page-wrapper">
+       <div class="container-fluid">
+            <h3 style="color:Blue;" class="page-header"><b>CMDesk</b></h3>
+          <div class="row" align="right">
+                  From:<input type="month"  id="fromdt" >
+                  To:<input type="month" id="todt" >
+                  <button name='Filter' id="filter" name="Filter" onclick="filter_chart_airtel();filter_chart_idea();filter_chart_rjil();"> Apply Filter</button>
 
-{%block content%}
-     <div id="container" style="width: 75%;">
-      <canvas id="population-chart" data-url="{% url 'chart-data' 'Airtel' %}"></canvas>
+              <canvas id="Airtel-chart"  data-url="{% url 'chart-data' 'Airtel' %}"></canvas>
+              <canvas id="Idea-chart"  data-url="{% url 'chart-data' 'Idea' %}"></canvas>
+              <canvas id="RJIL-chart" data-url="{% url 'chart-data' 'RJIL' %}"></canvas>
+              <canvas id="Sify-chart"  data-url="{% url 'chart-data' 'Sify' %}"></canvas>
+              <canvas id="VMSL-chart"  data-url="{% url 'chart-data' 'VMSL' %}"></canvas>
+              <canvas id="U-VMSL-chart" data-url="{% url 'chart-data' 'U-VMSL' %}"></canvas>
+           </div>
+      </div>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <script>
 
+
+<script>
     $(function () {
-
-      var $populationChart = $("#population-chart");
+      var $RevenueChart = $("#Airtel-chart");
       $.ajax({
-        url: $populationChart.data("url"),
+        url: $RevenueChart.data("url"),
         success: function (data) {
-
-          var ctx = $populationChart[0].getContext("2d");
-
+          var ctx = $RevenueChart[0].getContext("2d");
           new Chart(ctx, {
             type: 'bar',
-            data: {
+          data: {
               labels: data.labels,
               datasets: [{
                 label: 'Revenue',
                 backgroundColor: 'blue',
                 data: data.data
-              }]
-            },
+                        }]
+                },
             options: {
               responsive: true,
-              legend: {
-                position: 'top',
-              },
-              title: {
-                display: true,
-                text: 'Airtel ahm  Revenu  Bar Chart'
-              }
-            }
-          });
+              legend: { position: 'top' },
+              title: { display: true,
+                         text: 'Airtel1  {{request.user.profile.ssa.code}} Revenu Bar Chart'
+                       },
+            scales: {
+               yAxes: [{
+                 ticks: {
+                 max: 55,
+                 min:5 ,
+                 reverse: false,
+                 stepSize: 5},
+                 scaleLabel: {
+                 display: true,
+                 labelString: "Revenues (Rs in Lakhs)",
+                 fontColor: "red"
+                             }
+                       }],
+               xAxes: [{
+                 gridLines: { display: true },
+                 scaleLabel: {
+                 display: true,
+                 labelString: "Month",
+                 fontColor: "red"
+                              }
+                       }],
+                     } // scales
+                  },
+               }); // new chart
+        } // function-data
+      }); // ajax
+    }); // function
+</script>
 
-        }
-      });
+<script>
+   // filter chart login function
+   function filter_chart_airtel()
+   {
+        let startdate=document.querySelector("#fromdt").value+"-01";
+        let todate=document.querySelector("#todt").value+"-01";
 
-    });
+       // console.log("from_date :"+startdate);
+        //console.log("todate:"+todate);
+        //let url=`/passiveinfra/chartdata/Airtel/${startdate}/${todate}`
+        //console.log(url);
+        $("#Airtel-chart").replaceWith($('<canvas id="Airtel-chart"  data-url="{% url 'chart-data' 'Airtel' %}"></canvas>'));
+        // load chart again
+        var $RevenueChart = $("#Airtel-chart");
+       $.ajax({
+        url:`/passiveinfra/chartdata/Airtel/${startdate}/${todate}`,
+        success: function (data) {
+          var ctx = $RevenueChart[0].getContext("2d");
+          new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Revenue',
+                backgroundColor: 'blue',
+                data: data.data
+                        }]
+                 },
+          options: {
+              responsive: true,
+              legend: { position: 'top' },
+              title: { display: true,
+                         text: 'Airtel2 {{request.user.profile.ssa.code}} Revenu Bar Chart'
+                       },
+                    },
+          scales: {
+            yAxes: [{
+                ticks: { beginAtZero: true,
+                 stepSize: 5},
+                scaleLabel: {
+                 display: true,
+                 labelString: "Revenues (Rs in Lakhs)",
+                 fontColor: "red"
+                             }
+                   }],
+            xAxes: [{
+                   gridLines: { display: true },
+                   scaleLabel: {
+                   display: true,
+                   labelString: "Month",
+                   fontColor: "red"
+                               }
+                   }],
+              } //scales
+         }); // new chart
+        } //success
+      }); //ajax
+   } // function
+</script>
+<script>
+    $(function () {
+      var $RevenueChart = $("#Idea-chart");
+      $.ajax({
+        url: $RevenueChart.data("url"),
+        success: function (data) {
+          var ctx = $RevenueChart[0].getContext("2d");
+          new Chart(ctx, {
+            type: 'bar',
+          data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Revenue',
+                backgroundColor: 'blue',
+                data: data.data
+                        }]
+                },
+            options: {
+              responsive: true,
+              legend: { position: 'top' },
+              title: { display: true,
+                         text: 'Idea {{request.user.profile.ssa.code}} Revenu Bar Chart'
+                       },
+            scales: {
+               yAxes: [{
+                 ticks: {
+                 max: 25,
+                 min:5 ,
+                 reverse: false,
+                 stepSize: 5},
+                 scaleLabel: {
+                 display: true,
+                 labelString: "Revenues (Rs in Lakhs)",
+                 fontColor: "red"
+                             }
+                       }],
+               xAxes: [{
+                 gridLines: { display: true },
+                 scaleLabel: {
+                 display: true,
+                 labelString: "Month",
+                 fontColor: "red"
+                              }
+                       }],
+                     } // scales
+                  },
+               }); // new chart
+        } // function-data
+      }); // ajax
+    }); // function
+</script>
 
-  </script>
-{%endblock %}
+<script>
+   // filter chart login function
+   function filter_chart_idea()
+   {
+        let startdate=document.querySelector("#fromdt").value;
+        let todate=document.querySelector("#todt").value;
+        console.log(startdate);
+        console.log(todate);
+        let url=`/passiveinfra/chartdata/Idea/${startdate}/${todate}`
+        console.log(url);
+        $("#Idea-chart").replaceWith($('<canvas id="Idea-chart"  data-url="{% url 'chart-data' 'Idea' %}"></canvas>'));
+        // load chart again
+        var $RevenueChart = $("#Idea-chart");
+
+       $.ajax({
+        url:`/passiveinfra/chartdata/Idea/${startdate}/${todate}`,
+        success: function (data) {
+          var ctx = $RevenueChart[0].getContext("2d");
+          new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Revenue',
+                backgroundColor: 'blue',
+                data: data.data
+                        }]
+                 },
+          options: {
+              responsive: true,
+              legend: { position: 'top' },
+              title: { display: true,
+                         text: 'Idea {{request.user.profile.ssa.code}} Revenu Bar Chart'
+                       },
+                    },
+          scales: {
+            yAxes: [{
+                ticks: { beginAtZero: true,
+                 stepSize: 5},
+                scaleLabel: {
+                 display: true,
+                 labelString: "Revenues (Rs in Lakhs)",
+                 fontColor: "red"
+                             }
+                   }],
+            xAxes: [{
+                   gridLines: { display: true },
+                   scaleLabel: {
+                   display: true,
+                   labelString: "Month",
+                   fontColor: "red"
+                               }
+                   }],
+              } //scales
+         }); // new chart
+        } //success
+      }); //ajax
+   } // function
+</script>
+<script>
+
+    $(function () {
+
+      var $RevenueChart = $("#RJIL-chart");
+      $.ajax({
+        url: $RevenueChart.data("url"),
+        success: function (data) {
+
+          var ctx = $RevenueChart[0].getContext("2d");
+
+          new Chart(ctx, {
+            type: 'bar',
+          data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Revenue',
+                backgroundColor: 'blue',
+                data: data.data
+                        }]
+                },
+            options: {
+              responsive: true,
+              legend: { position: 'top' },
+              title: { display: true,
+                         text: 'RJIL {{request.user.profile.ssa.code}} Revenu Bar Chart'
+                       },
+                     },
+            scales: {
+               yAxes: [{
+                ticks: { beginAtZero: true
+
+                      },
+                scaleLabel: {
+                 display: true,
+                 labelString: "Revenues (Rs in Lakhs)",
+                 fontColor: "red"
+                             }
+                       }],
+               xAxes: [{
+                 gridLines: { display: true },
+                 scaleLabel: {
+                 display: true,
+                 labelString: "Month",
+                 fontColor: "red"
+                              }
+                       }],
+                     } // scales
+               }); // new chart
+        } // function-data
+      }); // ajax
+    }); // function
+</script>
+<script>
+   // filter chart login function
+   function filter_chart_rjil()
+   {
+        let startdate=document.querySelector("#fromdt").value;
+        let todate=document.querySelector("#todt").value;
+        console.log(startdate);
+        console.log(todate);
+        let url=`/passiveinfra/chartdata/RJIL/${startdate}/${todate}`
+        console.log(url);
+        $("#RJIL-chart").replaceWith($('<canvas id="RJIL-chart"  data-url="{% url 'chart-data' 'RJIL' %}"></canvas>'));
+        // load chart again
+        var $RevenueChart = $("#RJIL-chart");
+
+       $.ajax({
+        url:`/passiveinfra/chartdata/RJIL/${startdate}/${todate}`,
+        success: function (data) {
+          var ctx = $RevenueChart[0].getContext("2d");
+          new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Revenue',
+                backgroundColor: 'blue',
+                data: data.data
+                        }]
+                 },
+          options: {
+              responsive: true,
+              legend: { position: 'top' },
+              title: { display: true,
+                         text: 'RJIL {{request.user.profile.ssa.code}} Revenu Bar Chart'
+                       },
+                    },
+          scales: {
+            yAxes: [{
+                ticks: { beginAtZero: true,
+                 stepSize: 5},
+                scaleLabel: {
+                 display: true,
+                 labelString: "Revenues (Rs in Lakhs)",
+                 fontColor: "red"
+                             }
+                   }],
+            xAxes: [{
+                   gridLines: { display: true },
+                   scaleLabel: {
+                   display: true,
+                   labelString: "Month",
+                   fontColor: "red"
+                               }
+                   }],
+              } //scales
+         }); // new chart
+        } //success
+      }); //ajax
+   } // function
+</script>
+{% endblock %}
 
 
 
